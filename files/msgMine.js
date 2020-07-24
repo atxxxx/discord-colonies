@@ -120,7 +120,7 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
             let mythriluser = result[0].Mythril
 
 
-            connection.query("UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=?, Atitix=?, Rock=?, Mytrhil=? WHERE Member_ID=?", [diamonduser + diamondToAdd, golduser + goldToAdd, ironuser + ironToAdd, coaluser + coalToAdd, atitixuser + atitixToAdd, pierreuser + pierreToAdd, mythriluser + mythrilToAdd, message.author.id], (error, result) => {
+            connection.query("UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=?, Atitix=?, Rock=?, Mythril=? WHERE Member_ID=?", [diamonduser + diamondToAdd, golduser + goldToAdd, ironuser + ironToAdd, coaluser + coalToAdd, atitixuser + atitixToAdd, pierreuser + pierreToAdd, mythriluser + mythrilToAdd, message.author.id], (error, result) => {
 
                 if (error) {
 
