@@ -11,6 +11,7 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
         if ((client.cooldowns.get("mine").get(message.author.id) + (10 * 1000)) > message.createdTimestamp) {
 
+            message.channel.send(":x: **Il te faut attendre pour pouvoir reminer !**");
             return;
 
         } else {
