@@ -1,12 +1,16 @@
 {
   "name": "discord-colonies",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Bot Officiel de Discord Colonies",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Bears",
+  "repository": {
+    "type": "git",
+    "url": " "
+  },
+  "author": "Bears, Raraph84",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.2.0",

@@ -90,12 +90,8 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
             // Si il a une pioche en bois
             if (result[0].Pickaxe == "Bois") {
 
-                console.log("1")
-
                 // Si il a assez de fer
                 if (result[0].Iron >= "15") {
-
-                    console.log("2")
 
                     let ironuser = result[0].Iron
 
@@ -124,6 +120,9 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
                         })
                     })
+                } else {
+                    message.channel.send("Tu n'a pas assez de fer !");
+                    return;
                 }
             }
         })

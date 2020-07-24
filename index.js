@@ -30,6 +30,7 @@ connection.connect(error => {
 // Création/connection du bot
 const client = new Discord.Client();
 client.login(process.env.TOKEN);
+client.cooldowns = new Discord.Collection();
 
 // Quand un message est envoyé
 client.on("message", message => {
@@ -78,7 +79,6 @@ client.on('message', message => {
             console.log(message.author.username + " n'avait pas d'inventaire. Création de celui-ci...")
 
             connection.query("INSERT INTO inventory (Member_ID, Diamond, Gold, Iron, Coal, Sword, Chestplate, Pickaxe) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [message.author.id, "0", "0", "0", "0", "Bois", "Cuir", "Bois"], (error, result) => {
-
 
                 if (error) {
 

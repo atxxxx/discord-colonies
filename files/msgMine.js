@@ -2,6 +2,9 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
     if (msgSplit[0].toLowerCase() != config.prefix + "mine") return;
 
+    if (!client.cooldowns.has("mine")) client.cooldowns.set("mine", new Discord.Collection());
+    if (!client.cooldowns.get("mine").has(message.author.id)) client.cooldowns.get("mine").set(message.author.id, message.createdTimestamp);
+
     if (message.channel.id !== "701720240207167520") {
         message.channel.send("Il faut faire la commande dans le channel mine !");
     }
@@ -48,7 +51,7 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
             });
         }
 
-        if(result[0].Pickaxe == "Fer") {
+        if (result[0].Pickaxe == "Fer") {
 
             // coal
             let mincoal = 3;
@@ -70,18 +73,21 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
             let maxiron = 6;
             let ironToAdd = Math.random() * (maxiron - miniron) + miniron;
             let ironuser = result[0].Iron
+            // atitix
+            let minatitix = 0;
+            let maxatitix = 1;
+            let atitixToAdd = Math.random() * (maxatitix - minatitix) + minatitix
+            let atitixuser = result[0].Atitix
 
-            connection.query("UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=? WHERE Member_ID=?", [diamonduser + diamondToAdd, golduser + goldToAdd, ironuser + ironToAdd, coaluser + coalToAdd, message.author.id], (error, result) => {
+            connection.query("UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=?, Atitix=? WHERE Member_ID=?", [diamonduser + diamondToAdd, golduser + goldToAdd, ironuser + ironToAdd, coaluser + coalToAdd, atitixuser + atitixToAdd, message.author.id], (error, result) => {
 
                 if (error) {
 
-                    console.log("Erreur MySQL - msgMine.js - inventory - IronPickaxe \"UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=? WHERE Member_ID=?\" !");
+                    console.log("Erreur MySQL - msgMine.js - inventory - IronPickaxe \"UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=?, Atitix=? WHERE Member_ID=?\" !");
                 }
 
                 message.react("✅");
             });
-
         }
-
     });
 }
