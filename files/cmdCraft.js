@@ -6,7 +6,7 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
         let embed = new Discord.MessageEmbed()
             .setColor("#57b8e2")
             .setAuthor("Craft de " + message.author.tag, message.author.avatarURL({ format: "png" }))
-            .setDescription("Liste des items à craft : \n`table`")
+            .setDescription("Liste des items à craft : \n`table`, `pioche`")
 
         message.channel.send("Merci de préciser un objet à crafter")
         message.channel.send(embed)
