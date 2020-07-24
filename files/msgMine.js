@@ -29,7 +29,9 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
     }
 
     if (message.channel.id !== "701720240207167520") {
+
         message.channel.send("Il faut faire la commande dans le channel mine !");
+        return;
     }
 
     connection.query("SELECT * FROM inventory WHERE Member_ID=?", [message.author.id], (error, result) => {
