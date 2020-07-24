@@ -125,6 +125,38 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
                     return;
                 }
             }
+
+            if(result[0].Pickaxe == "Fer") {
+                if(result[0].Gold >= "25") {
+                    let golduser = result[0].Gold
+                    connection.query("UPDATE inventory SET Gold=? WHERE Member_ID=?", [golduser - 25, message.author.id], (error, result) => {
+
+                        if (error) {
+
+                            console.log("Erreur MySQL - cmdCraft - \"UPDATE inventory SET Gold=? WHERE Member_ID=?, ligne 132\" !");
+                            message.channel.send("**:x: Une erreur est survenue, réessayez plus tard !**");
+                            return;
+                        }
+
+                        message.channel.send("*Crafting en cours...*")
+
+                        connection.query("UPDATE inventory SET Pickaxe=? WHERE Member_ID=?", ["Or", message.author.id], (error, result) => {
+
+                            if (error) {
+
+                                console.log("Erreur MySQL - cmdCraft - \"UPDATE inventory SET Pickaxe=? WHERE Member_ID=?, ligne 143\" !");
+                                message.channel.send("**:x: Une erreur est survenue, réessayez plus tard !**");
+                                return;
+                            }
+
+                            message.channel.send("**Pioche en or craftée !**")
+
+
+                        })
+
+                    })
+                }
+            }
         })
     }
 }
