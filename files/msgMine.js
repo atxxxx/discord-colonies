@@ -9,8 +9,13 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
     } else {
 
-        if (client.cooldowns.get("mine")) {
-            //
+        if ((client.cooldowns.get("mine").get(message.author.id) + (10 * 1000)) > message.createdTimestamp) {
+
+            return;
+
+        } else {
+
+            client.cooldowns.get("mine").set(message.author.id, message.createdTimestamp);
         }
     }
 
@@ -84,7 +89,7 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
             let ironuser = result[0].Iron
             // atitix
             let minatitix = 0;
-            let maxatitix = 1;
+            let maxatitix = 0.1;
             let atitixToAdd = Math.random() * (maxatitix - minatitix) + minatitix
             let atitixuser = result[0].Atitix
 
