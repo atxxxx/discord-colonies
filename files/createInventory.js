@@ -11,11 +11,11 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
         // On créé l'inventaire si il n'en a pas
         if (result.length < 1) {
 
-            connection.query("INSERT INTO inventory (Member_ID, Diamond, Gold, Iron, Coal, Sword, Chestplate, Pickaxe) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [message.author.id, "0", "0", "0", "0", "Bois", "Cuir", "Bois"], (error, result) => {
+            connection.query("INSERT INTO inventory (Member_ID, Colonies_Coins, Diamond, Gold, Iron, Coal, Atitix, Amethyst, Wood, Rock, Sword, Chestplate, Pickaxe, Axe, CraftingTable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [message.author.id, "0", "0", "0", "0", "0", "0", "0", "0", "0", "Bois", "Cuir", "Bois", "Bois", "Non"], (error, result) => {
 
                 if (error) {
 
-                    console.log("Erreur MySQL - createInventory.js - \"INSERT INTO inventory (Member_ID, Diamond, Gold, Iron, Coal, Sword, Chestplate, Pickaxe) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\" !");
+                    console.log("Erreur MySQL - createInventory.js - \"Member_ID, Colonies_Coins, Diamond, Gold, Iron, Coal, Atitix, Amethyst, Wood, Rock, Sword, Chestplate, Pickaxe, Axe, CraftingTable\" !");
                     return;
                 }
 
