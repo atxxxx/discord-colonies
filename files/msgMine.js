@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
     if (msgSplit[0].toLowerCase() != config.prefix + "mine") return;
@@ -13,7 +15,10 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
             if (!message.member.hasPermission("ADMINISTRATOR")) {
 
-                message.channel.send(":x: **Il te faut attendre pour pouvoir reminer !**");
+                let mins = moment((client.cooldowns.get("mine").get(message.author.id) + (5 * 60 * 1000)) - message.createdTimestamp).format("mm");
+                let secs = moment((client.cooldownInfo.get(message.author.id) + (5 * 60 * 1000)) - message.createdTimestamp).format("ss");
+
+                message.channel.send(":x: **Il te faut attendre encore " + mins + " minute et " + secs + " secondes pour pouvoir reminer !**");
                 return;
             }
 
