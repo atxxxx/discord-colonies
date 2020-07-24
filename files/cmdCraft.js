@@ -89,6 +89,7 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
             // Si il a une pioche en bois
             if (result[0].Pickaxe == "Bois") {
+                message.channel.send("La pioche coûte 15 de fer !")
 
                 // Si il a assez de fer
                 if (result[0].Iron >= "15") {
@@ -127,6 +128,7 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
             }
 
             if(result[0].Pickaxe == "Fer") {
+                message.channel.send("La pioche coûte 25 d'or !");
                 if(result[0].Gold >= "25") {
                     let golduser = result[0].Gold
                     connection.query("UPDATE inventory SET Gold=? WHERE Member_ID=?", [golduser - 25, message.author.id], (error, result) => {
@@ -154,6 +156,52 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
                         })
 
+                    })
+                }
+            }
+            if(result[0].Pickaxe == "Or") {
+                message.channel.send("Il te faut 50 mythril et 25 d'or pour crafter une pioche en mytrhil !")
+                if(result[0].Mythril >= "50" && result[0].Gold >= "25") {
+                    let golduser = result[0].Gold
+                    let mythriluser = result[0].Mythril
+
+                    connection.query("UPDATE inventory SET Mythril=? WHERE Member_ID=?", [mythriluser - 50, message.author.id], (error, result) => {
+
+                        if (error) {
+
+                            console.log("Erreur MySQL - cmdCraft - \"UPDATE inventory SET Gold=? WHERE Member_ID=?, ligne 132\" !");
+                            message.channel.send("**:x: Une erreur est survenue, réessayez plus tard !**");
+                            return;
+                        }
+
+                        connection.query("UPDATE inventory SET Gold=? WHERE Member_ID=?", [golduser - 25, message.author.id], (error, result) => {
+
+                            if (error) {
+    
+                                console.log("Erreur MySQL - cmdCraft - \"UPDATE inventory SET Gold=? WHERE Member_ID=?, ligne 132\" !");
+                                message.channel.send("**:x: Une erreur est survenue, réessayez plus tard !**");
+                                return;
+                            }
+
+
+                            message.channel.send("*Crafting en cours...*")
+
+                            connection.query("UPDATE inventory SET Pickaxe=? WHERE Member_ID=?", ["Mythril", message.author.id], (error, result) => {
+
+                                if (error) {
+    
+                                    console.log("Erreur MySQL - cmdCraft - \"UPDATE inventory SET Pickaxe=? WHERE Member_ID=?, ligne 189\" !");
+                                    message.channel.send("**:x: Une erreur est survenue, réessayez plus tard !**");
+                                    return;
+                                }
+    
+                                message.channel.send("**Pioche en mythril craftée !**")
+    
+    
+                            })
+
+
+                        })
                     })
                 }
             }
