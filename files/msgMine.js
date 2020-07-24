@@ -9,10 +9,13 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
     } else {
 
-        if ((client.cooldowns.get("mine").get(message.author.id) + (10 * 1000)) > message.createdTimestamp) {
+        if ((client.cooldowns.get("mine").get(message.author.id) + (5 * 60 * 1000)) > message.createdTimestamp) {
 
-            message.channel.send(":x: **Il te faut attendre pour pouvoir reminer !**");
-            return;
+            if (!message.member.hasPermission("ADMINISTRATOR")) {
+
+                message.channel.send(":x: **Il te faut attendre pour pouvoir reminer !**");
+                return;
+            }
 
         } else {
 
