@@ -6,4 +6,6 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
     message.member.roles.remove("736155290403209336");
     message.member.roles.add("701459895765172255");
+
+    message.delete();
 }
