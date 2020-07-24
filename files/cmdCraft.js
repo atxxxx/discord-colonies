@@ -11,8 +11,6 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
         message.channel.send("Merci de préciser un objet à crafter")
         message.channel.send(embed)
         return;
-
-
     }
 
     if (msgSplit[1] == "table") {
@@ -41,8 +39,6 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
                             return;
                         }
 
-
-
                         message.channel.send("*Crafting en cours...*")
 
                         connection.query("UPDATE inventory SET CraftingTable=? WHERE Member_ID=?", ["Oui", message.author.id], (error, result) => {
@@ -55,29 +51,24 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
                             }
 
                             message.channel.send("**Table de craft craftée !**")
+                        })
+                    })
 
-
-                        }
-                ,)
-                    }
-
-            ,)
                 } else {
+
                     message.channel.send("Vous n'avez pas assez de bois !")
                     return;
                 }
+
             } else {
+
                 message.channel.send("Vous avez déjà une table de craft !")
                 return;
             }
-        }
-
-
-    ,)
+        })
     }
 
     // Craft des pioches
-
     if (msgSplit[1] == "pioche") {
 
         connection.query("SELECT * FROM inventory WHERE Member_ID=?", [message.author.id], (error, result) => {
@@ -89,17 +80,22 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
                 return;
             }
 
-            // si il a une table de craft
+            // Si il a une table de craft
             if (result[0].CraftingTable == "Non") {
-                message.channel.send("Tu dois avoir une table de craft !")
+
+                message.channel.send("Tu dois avoir une table de craft !");
                 return;
             }
 
-            //si il a une pioche en bois
+            // Si il a une pioche en bois
             if (result[0].Pickaxe == "Bois") {
 
-                // si il a assez de fer
+                console.log("1")
+
+                // Si il a assez de fer
                 if (result[0].Iron >= "15") {
+
+                    console.log("2")
 
                     let ironuser = result[0].Iron
 
