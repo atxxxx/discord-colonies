@@ -64,8 +64,13 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
             let maxiron = 6;
             let ironToAdd = Math.random() * (maxiron - miniron) + miniron;
             let ironuser = result[0].Iron
+            // pierre 
+            let minpierre = 0;
+            let maxpierre = 5;
+            let pierreToAdd = Math.random() * (maxpierre - minpierre) + minpierre;
+            let pierreuser = result[0].Rock
 
-            connection.query("UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=? WHERE Member_ID=?", [diamonduser + diamondToAdd, golduser + goldToAdd, ironuser + ironToAdd, coaluser + coalToAdd, message.author.id], (error, result) => {
+            connection.query("UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=?, Rock=? WHERE Member_ID=?", [diamonduser + diamondToAdd, golduser + goldToAdd, ironuser + ironToAdd, coaluser + coalToAdd, pierreuser + pierreToAdd, message.author.id], (error, result) => {
 
                 if (error) {
 
@@ -103,8 +108,13 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
             let maxatitix = 1;
             let atitixToAdd = Math.random() * (maxatitix - minatitix) + minatitix
             let atitixuser = result[0].Atitix
+            // pierre 
+            let minpierre = 0;
+            let maxpierre = 9;
+            let pierreToAdd = Math.random() * (maxpierre - minpierre) + minpierre;
+            let pierreuser = result[0].Rock
 
-            connection.query("UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=?, Atitix=? WHERE Member_ID=?", [diamonduser + diamondToAdd, golduser + goldToAdd, ironuser + ironToAdd, coaluser + coalToAdd, atitixuser + atitixToAdd, message.author.id], (error, result) => {
+            connection.query("UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=?, Atitix=?, Rock=? WHERE Member_ID=?", [diamonduser + diamondToAdd, golduser + goldToAdd, ironuser + ironToAdd, coaluser + coalToAdd, atitixuser + atitixToAdd, pierreuser + pierreToAdd, message.author.id], (error, result) => {
 
                 if (error) {
 
