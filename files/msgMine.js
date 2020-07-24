@@ -21,10 +21,10 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
             if (!message.member.hasPermission("ADMINISTRATOR")) {
 
-                let mins = moment((client.cooldowns.get("mine").get(message.author.id) + (5 * 60 * 1000)) - message.createdTimestamp).format("m");
+                let mins = moment((client.cooldowns.get("mine").get(message.author.id) + (5 * 60 * 1000)) - message.createdTimestamp).format("mm");
                 let secs = moment((client.cooldowns.get("mine").get(message.author.id) + (5 * 60 * 1000)) - message.createdTimestamp).format("ss");
 
-                message.channel.send(":x: **Il te faut attendre encore " + mins + " minutes et " + secs + " secondes pour pouvoir reminer !**");
+                message.channel.send(":x: **Il te faut attendre encore " + mins + " minute et " + secs + " secondes pour pouvoir reminer !**");
                 return;
             }
 
@@ -166,9 +166,57 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
             let maxmythril = 3;
             let mythrilToAdd = Math.random() * (maxmythril - minmythril) + minmythril;
             let mythriluser = result[0].Mythril
+
+
+            connection.query("UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=?, Atitix=?, Rock=?, Mythril=? WHERE Member_ID=?", [diamonduser + diamondToAdd, golduser + goldToAdd, ironuser + ironToAdd, coaluser + coalToAdd, atitixuser + atitixToAdd, pierreuser + pierreToAdd, mythriluser + mythrilToAdd, message.author.id], (error, result) => {
+
+                if (error) {
+
+                    console.log("Erreur MySQL - msgMine.js - inventory - Goldepickaxe \"UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=?, Atitix=?, Rock=?, Mythril=? WHERE Member_ID=?\" !");
+                }
+
+                message.react("✅");
+
+            })
+        } if(result[0].Pickaxe == "Mythril") {
+            // coal
+            let mincoal = 9;
+            let maxcoal = 35;
+            let coalToAdd = Math.random() * (maxcoal - mincoal) + mincoal;
+            let coaluser = result[0].Coal
+            // diamond
+            let mindiamond = 0;
+            let maxdiamond = 7;
+            let diamondToAdd = Math.random() * (maxdiamond - mindiamond) + mindiamond;
+            let diamonduser = result[0].Diamond
+            // gold
+            let mingold = 3;
+            let maxgold = 10;
+            let goldToAdd = Math.random() * (maxgold - mingold) + mingold;
+            let golduser = result[0].Gold
+            // iron
+            let miniron = 4;
+            let maxiron = 15;
+            let ironToAdd = Math.random() * (maxiron - miniron) + miniron;
+            let ironuser = result[0].Iron
+            // atitix
+            let minatitix = 0;
+            let maxatitix = 2;
+            let atitixToAdd = Math.random() * (maxatitix - minatitix) + minatitix
+            let atitixuser = result[0].Atitix
+            // pierre 
+            let minpierre = 6;
+            let maxpierre = 15;
+            let pierreToAdd = Math.random() * (maxpierre - minpierre) + minpierre;
+            let pierreuser = result[0].Rock
+            // Mythril
+            let minmythril = 0;
+            let maxmythril = 5;
+            let mythrilToAdd = Math.random() * (maxmythril - minmythril) + minmythril;
+            let mythriluser = result[0].Mythril
             // Amethyst
             let minamethyst = 0;
-            let maxamethyst = 1;
+            let maxamethyst = 2;
             let amethystToAdd = Math.random() * (maxamethyst - minamethyst) + minamethyst
             let amethystuser = result[0].Amethyst
 
@@ -177,7 +225,7 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
 
                 if (error) {
 
-                    console.log("Erreur MySQL - msgMine.js - inventory - Goldepickaxe \"UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=?, Atitix=?, Rock=?, Mythril=?, Amethyst=? WHERE Member_ID=?\" !");
+                    console.log("Erreur MySQL - msgMine.js - inventory - MythrilPickaxe \"UPDATE inventory SET Diamond=?, Gold=?, Iron=?, Coal=?, Atitix=?, Rock=?, Mythril=?, Amethyst=? WHERE Member_ID=?\" !");
                 }
 
                 message.react("✅");
