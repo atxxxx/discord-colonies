@@ -3,7 +3,16 @@ module.exports = (message, msgSplit, client, config, Discord, connection) => {
     if (msgSplit[0].toLowerCase() != config.prefix + "mine") return;
 
     if (!client.cooldowns.has("mine")) client.cooldowns.set("mine", new Discord.Collection());
-    if (!client.cooldowns.get("mine").has(message.author.id)) client.cooldowns.get("mine").set(message.author.id, message.createdTimestamp);
+    if (!client.cooldowns.get("mine").has(message.author.id)) {
+
+        client.cooldowns.get("mine").set(message.author.id, message.createdTimestamp);
+
+    } else {
+
+        if (client.cooldowns.get("mine")) {
+            //
+        }
+    }
 
     if (message.channel.id !== "701720240207167520") {
         message.channel.send("Il faut faire la commande dans le channel mine !");
